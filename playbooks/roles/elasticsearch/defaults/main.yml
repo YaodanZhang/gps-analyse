@@ -1,0 +1,8 @@
+---
+elasticsearch_version: "2.1.1"
+elasticsearch_cluster_name: "elasticsearch"
+elasticsearch_bind_host: "0.0.0.0"
+elasticsearch_tcp_port: "9300"
+elasticsearch_http_port: "9200"
+elasticsearch_cors_enable: "false"
+elasticsearch_cors_allow_origin: "*"

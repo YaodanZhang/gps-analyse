@@ -1,0 +1,13 @@
+---
+
+- name: Add GOCD deb repository
+  shell: 'echo "deb http://dl.bintray.com/gocd/gocd-deb/ /" > /etc/apt/sources.list.d/gocd.list'
+
+- name: Add public key
+  shell: 'wget --quiet -O - "https://bintray.com/user/downloadSubjectPublicKey?username=gocd" | sudo apt-key add -'
+
+- name: Install gocd-agent
+  apt: pkg=go-agent state=present update_cache=yes  
+
+- name: Ensure gocd-agent is running
+  service: name=go-agent state=started  

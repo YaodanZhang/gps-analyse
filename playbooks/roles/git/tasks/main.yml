@@ -1,0 +1,23 @@
+---
+
+- name: Install Git Build Essentials
+  apt: pkg={{ item }} state=present update_cache=yes
+  with_items:
+    - build-essential 
+    - libssl-dev 
+    - libcurl4-gnutls-dev
+    - libexpat1-dev 
+    - gettext
+    - unzip
+
+- name: Check Git Downloaded
+  stat: path=git.zip
+  register: git_exist
+
+- name: Download Git
+  shell: 'wget https://github.com/git/git/archive/v{{ git_version }}.zip -O git.zip'
+  when: not git_exist.stat.exists  
+
+- name: Compile and Install Git
+  shell: 'unzip git.zip;cd git-{{ git_version }};make prefix=/usr/local all;make prefix=/usr/local install'
+  when: not git_exist.stat.exists 

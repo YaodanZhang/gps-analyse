@@ -1,0 +1,17 @@
+- hosts: gocd-server
+  sudo: yes
+  roles:
+    - git
+    - gocd-server
+  vars:
+    git_version: "2.7.0"
+
+- hosts: gocd-agent
+  sudo: yes
+  roles:
+    - git
+    - java
+    - maven
+    - gocd-agent    
+  vars:
+    git_version: "2.7.0"
