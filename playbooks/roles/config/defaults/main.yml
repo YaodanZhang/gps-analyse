@@ -3,6 +3,7 @@ elastic_index: "soda-default"
 elastic_type: "gps"
 elastic_workspace: "/home/vagrant/kibana-workspace"
 elastic_index_mapping: "/home/vagrant/kibana-workspace/mapping"
+elasticsearch_url: "http://localhost:9200"
 
 kibana_search_index: "soda-*"
 kibana_dashboard: "/home/vagrant/kibana-workspace/dashboard"
