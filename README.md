@@ -12,7 +12,9 @@
 vagrant init ubuntu/trusty64;
 ```
 
-3) Change the configuration in file ```Vagrantfile``` to set up network
+3) Change the configuration in file ```Vagrantfile``` to set up network and VM memory.
+
+Note: at least 4G RAM is required. 32G is preferred.
 
 4) Start up virtual machine
 
