@@ -21,7 +21,7 @@
 - name: Copy command
   template: src={{ item.src }} dest={{ item.dest }} mode=777
   with_items:
-    - { src: "kibana-gps/load.sh.j2", dest: "{{ elastic_workspace }}/load.sh"}
+    - { src: "load.sh.j2", dest: "{{ elastic_workspace }}/load.sh"}
 
 - name: Initial Kibana Dashboad
   command: "{{ item }}/load.sh"
