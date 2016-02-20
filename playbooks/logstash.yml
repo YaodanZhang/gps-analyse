@@ -1,5 +1,0 @@
-- hosts: logstash
-  sudo: yes
-  roles:
-    - java
-    - logstash

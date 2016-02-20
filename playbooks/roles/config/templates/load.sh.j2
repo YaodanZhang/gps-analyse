@@ -1,0 +1,48 @@
+#!/bin/bash
+
+ELASTICSEARCH=http://localhost:9200
+CURL=curl
+KIBANA_INDEX=".kibana"
+
+echo "Initializing Elasticsearch Index..."
+
+$CURL -XPUT $ELASTICSEARCH/{{ elastic_index }}/
+
+for file in mapping/*.json
+do
+    echo "Loading mapping"
+    $CURL -XPUT $ELASTICSEARCH/{{ elastic_index }}/_mapping/{{ elastic_type }} \
+        -d @$file || exit 1
+    echo
+done
+
+echo "Loading dashboards to $ELASTICSEARCH in $KIBANA_INDEX"
+
+for file in visualization/*.json
+do
+    name=`basename $file .json`
+    echo "Loading visualization $name:"
+    $CURL -XPUT $ELASTICSEARCH/$KIBANA_INDEX/visualization/$name \
+        -d @$file || exit 1
+    echo
+done
+
+for file in dashboard/*.json
+do
+    name=`basename $file .json`
+    echo "Loading dashboard $name:"
+    $CURL -XPUT $ELASTICSEARCH/$KIBANA_INDEX/dashboard/$name \
+        -d @$file || exit 1
+    echo
+done
+
+for file in index-pattern/*.json
+do
+    name=`awk '$1 == "\"title\":" {gsub(/"/, "", $2); print $2}' $file`
+    echo "Loading index pattern $name:"
+    $CURL -XPUT $ELASTICSEARCH/$KIBANA_INDEX/index-pattern/$name \
+       -d @$file || exit 1
+    echo
+done
+
+

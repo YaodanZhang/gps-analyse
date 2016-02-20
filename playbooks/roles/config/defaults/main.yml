@@ -1,0 +1,10 @@
+---
+elastic_index: "soda-default"
+elastic_type: "gps"
+elastic_workspace: "/home/vagrant/kibana-workspace"
+elastic_index_mapping: "/home/vagrant/kibana-workspace/mapping"
+
+kibana_search_index: "soda-*"
+kibana_dashboard: "/home/vagrant/kibana-workspace/dashboard"
+kibana_index_pattern: "/home/vagrant/kibana-workspace/index-pattern"
+kibana_visualization: "/home/vagrant/kibana-workspace/visualization"

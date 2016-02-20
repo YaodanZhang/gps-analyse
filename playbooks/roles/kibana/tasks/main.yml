@@ -33,9 +33,6 @@
 - name: Touch log file if it does not exist
   command: touch {{ kibana_log }}
            creates={{ kibana_log }}
-#
-#- name: Set log file permissions
-#  file: path={{ kibana_log }} owner=kibana group=kibana mode=0644
 
 - name: Configure Kibana log rotation
   template: src=logrotate_kibana.j2 dest=/etc/logrotate.d/kibana

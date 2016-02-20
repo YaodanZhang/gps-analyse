@@ -1,5 +1,0 @@
-- hosts: kibana
-  sudo: yes
-  roles:
-    - java
-    - kibana

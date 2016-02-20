@@ -1,0 +1,16 @@
+{
+  "{{ elastic_type }}": {
+    "properties": {
+      "location": {
+        "type": "geo_point"
+      },
+      "timestamp": {
+        "type": "date",
+        "format": "strict_date_optional_time||epoch_millis"
+      },
+      "vin": {
+        "type": "string"
+      }
+    }
+  }
+}

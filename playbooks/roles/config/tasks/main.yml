@@ -1,0 +1,28 @@
+---
+- name: Create workspace
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ elastic_workspace }}"
+    - "{{ elastic_index_mapping }}"
+    - "{{ kibana_dashboard }}"
+    - "{{ kibana_index_pattern }}"
+    - "{{ kibana_visualization }}"
+
+- name: Copy workspace
+  template: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: "mapping/mapping.json.j2", dest: "{{ elastic_index_mapping }}/mapping.json"}
+    - { src: "dashboard/gps.json.j2", dest: "{{ kibana_dashboard }}/gps.json"}
+    - { src: "index-pattern/gps-heat-map.json.j2", dest: "{{ kibana_index_pattern }}/gps-heat-map.json"}
+    - { src: "visualization/gps-chart.json.j2", dest: "{{ kibana_visualization }}/gps-chart.json"}
+    - { src: "visualization/gps-heat-map.json.j2", dest: "{{ kibana_visualization }}/gps-heat-map.json"}
+    - { src: "visualization/vins.json.j2", dest: "{{ kibana_visualization }}/vins.json"}
+
+- name: Copy command
+  template: src={{ item.src }} dest={{ item.dest }} mode=777
+  with_items:
+    - { src: "kibana-gps/load.sh.j2", dest: "{{ elastic_workspace }}/load.sh"}
+
+- name: Initial Kibana Dashboad
+  command: "{{ item }}/load.sh"
+  with_items: "{{ elastic_workspace }}"
