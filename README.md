@@ -40,6 +40,35 @@ Put some gps data into the Elasticsearch. The default index (```{{elastic_index}
 
 The following is an example:
 
+1) Create index for daily logs
+
+```
+curl -XPUT localhost:9200/soda-20160220
+```
+
+2) Change the setting of this index.
+
+```
+curl -XPUT localhost:9200/soda-20160220/_mapping/gps -d '{
+    "gps": {
+        "properties": {
+            "location": {
+                "type": "geo_point"
+            },
+            "timestamp": {
+                "type": "date",
+                "format": "strict_date_optional_time||epoch_millis"
+            },
+            "vin": {
+                "type": "string"
+            }
+        }
+    }
+}'
+```
+
+3) Add data into it
+
 ```
 curl -XPUT localhost:9200/soda-20160220/gps/1 -d '{
     "vin": "A0001",
