@@ -82,7 +82,7 @@ curl -XPUT localhost:9200/soda-20160220/gps/1 -d '{
 
 ### 2. Open Dashboard
 
-Open Kibana dashboard, click open icon and you can find the pre-set gps heat map dashboard named as "gps".
+Open Kibana dashboard (e.g. http://localhost:5601), click open icon and you can find the pre-set gps heat map dashboard named as "gps".
 
 It's easy to select vehicle/time range in it. Please refer Kibana tutorial for usage:
 - https://www.elastic.co/guide/en/kibana/current/index.html
