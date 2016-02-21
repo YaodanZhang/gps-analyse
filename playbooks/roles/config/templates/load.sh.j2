@@ -3,12 +3,13 @@
 ELASTICSEARCH={{ elasticsearch_url }}
 CURL=curl
 KIBANA_INDEX=".kibana"
+DIR={{elastic_workspace}}
 
 echo "Initializing Elasticsearch Index..."
 
 $CURL -XPUT $ELASTICSEARCH/{{ elastic_index }}/
 
-for file in mapping/*.json
+for file in $DIR/mapping/*.json
 do
     echo "Loading mapping"
     $CURL -XPUT $ELASTICSEARCH/{{ elastic_index }}/_mapping/{{ elastic_type }} \
@@ -22,7 +23,7 @@ echo "Create Kibana Index..."
 
 $CURL -XPUT $ELASTICSEARCH/{{ kibana_index }}/
 
-for file in visualization/*.json
+for file in $DIR/visualization/*.json
 do
     name=`basename $file .json`
     echo "Loading visualization $name:"
@@ -31,7 +32,7 @@ do
     echo
 done
 
-for file in dashboard/*.json
+for file in $DIR/dashboard/*.json
 do
     name=`basename $file .json`
     echo "Loading dashboard $name:"
@@ -40,7 +41,7 @@ do
     echo
 done
 
-for file in index-pattern/*.json
+for file in $DIR/index-pattern/*.json
 do
     name=`awk '$1 == "\"title\":" {gsub(/"/, "", $2); print $2}' $file`
     echo "Loading index pattern $name:"
@@ -49,7 +50,7 @@ do
     echo
 done
 
-for file in kibana-config/*.json
+for file in $DIR/kibana-config/*.json
 do
     name=`awk '$1 == "\"defaultIndex\":" {gsub(/"/, "", $2); print $2}' $file`
     echo "Loading default index pattern $name:"

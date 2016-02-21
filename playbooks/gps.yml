@@ -1,7 +1,4 @@
 - hosts: elasticsearch
   sudo: yes
   roles:
-    - java
-    - elasticsearch
-    - kibana
     - config
