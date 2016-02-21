@@ -54,7 +54,7 @@ for file in $DIR/kibana-config/*.json
 do
     name=`awk '$1 == "\"defaultIndex\":" {gsub(/"/, "", $2); print $2}' $file`
     echo "Loading default index pattern $name:"
-    $CURL -XPUT $ELASTICSEARCH/$KIBANA_INDEX/config \
+    $CURL -XPUT $ELASTICSEARCH/$KIBANA_INDEX/config/{{kibana_version}} \
        -d @$file || exit 1
     echo
 done
