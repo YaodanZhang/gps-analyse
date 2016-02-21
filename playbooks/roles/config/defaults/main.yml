@@ -5,7 +5,7 @@ elastic_workspace: "/home/vagrant/kibana-workspace"
 elastic_index_mapping: "/home/vagrant/kibana-workspace/mapping"
 elasticsearch_url: "http://localhost:9200"
 
-kibana_version: "4.4.1"
+kibana_version: "4.3.1"
 kibana_index: ".kibana"
 kibana_search_index: "soda-*"
 kibana_dashboard: "/home/vagrant/kibana-workspace/dashboard"

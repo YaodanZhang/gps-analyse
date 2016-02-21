@@ -1,5 +1,5 @@
 ---
-kibana_version: "4.4.1"
+kibana_version: "4.3.1"
 kibana_os: "linux"
 kibana_arch: "x64"
 kibana_dir: "/opt"
@@ -11,3 +11,6 @@ kibana_index: ".kibana"
 kibana_log: /var/log/kibana.log
 kibana_log_rotate_count: 5
 kibana_log_rotate_interval: daily
+
+kibana_gaode_config_bundle_js_location: optimize/bundles/kibana.bundle.js
+kibana_gaode_config_map_js_location: src/ui/public/vislib/visualizations/_map.js

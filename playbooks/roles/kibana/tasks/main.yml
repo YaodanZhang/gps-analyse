@@ -30,6 +30,14 @@
   notify:
     - Restart Kibana
 
+- name: Configure Kibana to use Gaode Map
+  copy: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: "_map.js", dest: "{{ kibana_dir }}/kibana-{{ kibana_version }}-{{ kibana_os }}-{{ kibana_arch }}/{{ kibana_gaode_config_map_js_location }}" }
+    - { src: "kibana.bundle.js", dest: "{{ kibana_dir }}/kibana-{{ kibana_version }}-{{ kibana_os }}-{{ kibana_arch }}/{{ kibana_gaode_config_bundle_js_location }}" }
+  notify:
+    - Restart Kibana
+
 - name: Touch log file if it does not exist
   command: touch {{ kibana_log }}
            creates={{ kibana_log }}
