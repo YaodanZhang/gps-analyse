@@ -7,6 +7,7 @@
     - "{{ kibana_dashboard }}"
     - "{{ kibana_index_pattern }}"
     - "{{ kibana_visualization }}"
+    - "{{ kibana_config }}"
 
 - name: Copy workspace
   template: src={{ item.src }} dest={{ item.dest }}
@@ -17,6 +18,7 @@
     - { src: "visualization/gps-chart.json.j2", dest: "{{ kibana_visualization }}/gps-chart.json"}
     - { src: "visualization/gps-heat-map.json.j2", dest: "{{ kibana_visualization }}/gps-heat-map.json"}
     - { src: "visualization/vins.json.j2", dest: "{{ kibana_visualization }}/vins.json"}
+    - { src: "kibana-config/default-index-pattern.json.j2", dest: "{{ kibana_config }}/default-index-pattern.json"}
 
 - name: Copy command
   template: src={{ item.src }} dest={{ item.dest }} mode=777

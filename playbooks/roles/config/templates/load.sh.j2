@@ -18,6 +18,10 @@ done
 
 echo "Loading dashboards to $ELASTICSEARCH in $KIBANA_INDEX"
 
+echo "Create Kibana Index..."
+
+$CURL -XPUT $ELASTICSEARCH/{{ kibana_index }}/
+
 for file in visualization/*.json
 do
     name=`basename $file .json`
@@ -41,6 +45,15 @@ do
     name=`awk '$1 == "\"title\":" {gsub(/"/, "", $2); print $2}' $file`
     echo "Loading index pattern $name:"
     $CURL -XPUT $ELASTICSEARCH/$KIBANA_INDEX/index-pattern/$name \
+       -d @$file || exit 1
+    echo
+done
+
+for file in kibana-config/*.json
+do
+    name=`awk '$1 == "\"defaultIndex\":" {gsub(/"/, "", $2); print $2}' $file`
+    echo "Loading default index pattern $name:"
+    $CURL -XPUT $ELASTICSEARCH/$KIBANA_INDEX/config \
        -d @$file || exit 1
     echo
 done
